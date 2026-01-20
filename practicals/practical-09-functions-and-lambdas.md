@@ -2,14 +2,11 @@
 
 ## Цель работы
 
-Научиться создавать и использовать функции в Python, включая передачу параметров, возвращение значений, использование анонимных функций (лямбда-функций) и применение функций для решения задач обработки данных.
+Научиться создавать и использовать функции в Python, освоить различные типы параметров, возвращаемые значения, а также анонимные функции (лямбда-выражения) и их применение в различных задачах.
 
 ## Теоретическая часть
 
-Функция - это именованный блок кода, который можно вызвать из другого места программы. Функции позволяют:
-- Повторно использовать код
-- Разбивать программу на логические блоки
-- Упрощать отладку и тестирование
+Функция - это именованный блок кода, который может принимать параметры и возвращать значение. Функции позволяют структурировать код, избежать дублирования и улучшить читаемость программы.
 
 ```python
 # Пример простой функции
@@ -22,30 +19,47 @@ message = greet("Алексей")
 print(message)  # Привет, Алексей!
 ```
 
+### Основные элементы функции:
+- Ключевое слово `def`
+- Имя функции
+- Параметры в круглых скобках
+- Двоеточие
+- Тело функции (с отступом)
+- Опциональный оператор `return`
+
 ## Практические задания
 
-### Задание 1: Простая функция
+### Задание 1: Создание простой функции
 
-Создайте функцию, которая принимает два числа и возвращает их сумму. Продемонстрируйте использование функции.
+Создайте функцию, которая принимает два числа и возвращает их сумму. Добавьте документацию к функции и вызовите её с разными параметрами.
 
 **Пример выполнения:**
 ```
-Введите первое число: 5
-Введите второе число: 3
-Сумма: 8
+Сумма 5 и 3: 8
+Сумма 10 и 20: 30
 ```
 
 **Код для выполнения:**
 ```python
 def add_numbers(a, b):
-    """Возвращает сумму двух чисел"""
+    """
+    Возвращает сумму двух чисел
+    
+    Args:
+        a (int/float): Первое число
+        b (int/float): Второе число
+    
+    Returns:
+        int/float: Сумма чисел a и b
+    """
     return a + b
 
-num1 = int(input("Введите первое число: "))
-num2 = int(input("Введите второе число: "))
+# Примеры использования
+result1 = add_numbers(5, 3)
+result2 = add_numbers(10, 20)
 
-result = add_numbers(num1, num2)
-print(f"Сумма: {result}")
+print(f"Сумма 5 и 3: {result1}")
+print(f"Сумма 10 и 20: {result2}")
 ```
 
 ---
@@ -56,25 +70,31 @@ print(f"Сумма: {result}")
 
 **Пример выполнения:**
 ```
-Введите длину: 10
-Площадь (ширина по умолчанию): 50
-Введите ширину: 7
-Площадь: 70
+Площадь (5x3): 15
+Площадь (5x1): 5
 ```
 
 **Код для выполнения:**
 ```python
-def calculate_rectangle_area(length, width=5):
-    """Вычисляет площадь прямоугольника"""
+def calculate_rectangle_area(length, width=1):
+    """
+    Вычисляет площадь прямоугольника
+    
+    Args:
+        length (float): Длина прямоугольника
+        width (float): Ширина прямоугольника (по умолчанию 1)
+    
+    Returns:
+        float: Площадь прямоугольника
+    """
     return length * width
 
-length = int(input("Введите длину: "))
-area_default = calculate_rectangle_area(length)
-print(f"Площадь (ширина по умолчанию): {area_default}")
+# Примеры использования
+area1 = calculate_rectangle_area(5, 3)
+area2 = calculate_rectangle_area(5)  # ширина по умолчанию
 
-width = int(input("Введите ширину: "))
-area_custom = calculate_rectangle_area(length, width)
-print(f"Площадь: {area_custom}")
+print(f"Площадь (5x3): {area1}")
+print(f"Площадь (5x1): {area2}")
 ```
 
 ---
@@ -93,7 +113,15 @@ print(f"Площадь: {area_custom}")
 **Код для выполнения:**
 ```python
 def calculate_sum_and_average(*args):
-    """Возвращает сумму и среднее значение чисел"""
+    """
+    Возвращает сумму и среднее значение произвольного количества чисел
+    
+    Args:
+        *args: Произвольное количество чисел
+    
+    Returns:
+        tuple: (сумма, среднее значение)
+    """
     if not args:
         return 0, 0
     
@@ -101,8 +129,9 @@ def calculate_sum_and_average(*args):
     average = total / len(args)
     return total, average
 
+# Пример использования
 numbers_str = input("Введите числа через пробел: ")
-numbers = [int(x) for x in numbers_str.split()]
+numbers = [float(x) for x in numbers_str.split()]
 
 total, average = calculate_sum_and_average(*numbers)
 print(f"Сумма: {total}")
@@ -117,17 +146,27 @@ print(f"Среднее: {average}")
 
 **Пример выполнения:**
 ```
-Информация о пользователе: Иван, 25 лет, город Москва
+Информация о пользователе: Иван Иванов, 25 лет, Москва
 ```
 
 **Код для выполнения:**
 ```python
 def format_person_info(name, age, city):
-    """Форматирует информацию о человеке"""
-    return f"{name}, {age} лет, город {city}"
+    """
+    Форматирует информацию о человеке
+    
+    Args:
+        name (str): Имя человека
+        age (int): Возраст
+        city (str): Город проживания
+    
+    Returns:
+        str: Отформатированная строка с информацией
+    """
+    return f"{name}, {age} лет, {city}"
 
-# Использование именованных аргументов
-info = format_person_info(name="Иван", age=25, city="Москва")
+# Пример использования с именованными аргументами
+info = format_person_info(name="Иван Иванов", age=25, city="Москва")
 print(f"Информация о пользователе: {info}")
 ```
 
@@ -139,316 +178,370 @@ print(f"Информация о пользователе: {info}")
 
 **Пример выполнения:**
 ```
-Введите число: 5
-Факториал 5 равен 120
+Факториал 5: 120
+Факториал 0: 1
 ```
 
 **Код для выполнения:**
 ```python
 def factorial(n):
-    """Вычисляет факториал числа рекурсивно"""
-    if n <= 1:
+    """
+    Вычисляет факториал числа рекурсивно
+    
+    Args:
+        n (int): Число для вычисления факториала (должно быть >= 0)
+    
+    Returns:
+        int: Факториал числа n
+    """
+    if n < 0:
+        raise ValueError("Факториал определен только для неотрицательных чисел")
+    if n == 0 or n == 1:
         return 1
     return n * factorial(n - 1)
 
-number = int(input("Введите число: "))
-result = factorial(number)
-print(f"Факториал {number} равен {result}")
+# Примеры использования
+print(f"Факториал 5: {factorial(5)}")
+print(f"Факториал 0: {factorial(0)}")
 ```
 
 ---
 
-### Задание 6: Функция с документацией
+### Задание 6: Функция с возвращаемым словарем
 
-Создайте функцию для проверки, является ли число простым, с полной документацией (docstring).
+Создайте функцию, которая принимает строку и возвращает словарь с информацией о строке: длина, количество слов, количество гласных и согласных.
 
 **Пример выполнения:**
 ```
-Введите число: 17
-Число 17 простое: True
+Информация о строке 'Привет мир':
+Длина: 10
+Количество слов: 2
+Гласных: 3
+Согласных: 5
 ```
 
 **Код для выполнения:**
 ```python
-def is_prime(n):
+def analyze_string(text):
     """
-    Проверяет, является ли число простым.
+    Анализирует строку и возвращает информацию о ней
     
     Args:
-        n (int): Число для проверки
-        
-    Returns:
-        bool: True, если число простое, иначе False
-        
-    Examples:
-        >>> is_prime(7)
-        True
-        >>> is_prime(8)
-        False
-    """
-    if n < 2:
-        return False
-    for i in range(2, int(n**0.5) + 1):
-        if n % i == 0:
-            return False
-    return True
-
-number = int(input("Введите число: "))
-result = is_prime(number)
-print(f"Число {number} простое: {result}")
-```
-
----
-
-### Задание 7: Функция с вложенной функцией
-
-Создайте функцию, которая содержит вложенную функцию для вычисления квадрата числа, а внешняя функция возводит результат в куб.
-
-**Пример выполнения:**
-```
-Введите число: 3
-Результат: 729 (сначала 3^2=9, потом 9^3=729)
-```
-
-**Код для выполнения:**
-```python
-def square_and_cube(n):
-    """Возводит число в квадрат, затем результат в куб"""
-    def square(x):
-        """Возвращает квадрат числа"""
-        return x * x
+        text (str): Входная строка для анализа
     
-    squared = square(n)
-    return squared ** 3
+    Returns:
+        dict: Словарь с информацией о строке
+    """
+    vowels = "аеёиоуыэюяaeiouAEIOU"
+    consonants = "бвгджзйклмнпрстфхцчшщbcdfghjklmnpqrstvwxyz"
+    
+    # Подсчет гласных и согласных
+    vowel_count = 0
+    consonant_count = 0
+    
+    for char in text:
+        if char in vowels:
+            vowel_count += 1
+        elif char in consonants:
+            consonant_count += 1
+    
+    # Подсчет слов
+    words = text.split()
+    word_count = len(words)
+    
+    return {
+        "length": len(text),
+        "word_count": word_count,
+        "vowel_count": vowel_count,
+        "consonant_count": consonant_count
+    }
 
-number = int(input("Введите число: "))
-result = square_and_cube(number)
-print(f"Результат: {result}")
+# Пример использования
+text = "Привет мир"
+analysis = analyze_string(text)
+
+print(f"Информация о строке '{text}':")
+for key, value in analysis.items():
+    print(f"{key.replace('_', ' ').title()}: {value}")
 ```
 
 ---
 
-### Задание 8: Лямбда-функции
+### Задание 7: Использование лямбда-функций
 
-Создайте несколько лямбда-функций для выполнения математических операций и продемонстрируйте их использование с функциями `map()`, `filter()`, `reduce()`.
+Создайте программу, которая использует лямбда-функции для выполнения математических операций и работы с коллекциями.
 
 **Пример выполнения:**
 ```
-Исходный список: [1, 2, 3, 4, 5]
-Удвоенные значения: [2, 4, 6, 8, 10]
+Сумма: 15
+Квадраты: [1, 4, 9, 16, 25]
 Четные числа: [2, 4]
 ```
 
 **Код для выполнения:**
 ```python
-from functools import reduce
-
-# Лямбда-функции
-double = lambda x: x * 2
-is_even = lambda x: x % 2 == 0
+# Лямбда-функции для математических операций
+add = lambda x, y: x + y
 multiply = lambda x, y: x * y
+square = lambda x: x ** 2
 
+# Использование лямбда-функций с map(), filter(), reduce()
 numbers = [1, 2, 3, 4, 5]
 
-# Использование map() с лямбда-функцией
-doubled = list(map(double, numbers))
-print(f"Удвоенные значения: {doubled}")
+# Возведение в квадрат
+squares = list(map(square, numbers))
+print(f"Квадраты: {squares}")
 
-# Использование filter() с лямбда-функцией
-even_numbers = list(filter(is_even, numbers))
-print(f"Четные числа: {even_numbers}")
+# Фильтрация четных чисел
+evens = list(filter(lambda x: x % 2 == 0, numbers))
+print(f"Четные числа: {evens}")
 
-# Использование reduce() с лямбда-функцией
-product = reduce(multiply, numbers)
-print(f"Произведение всех чисел: {product}")
+# Сумма чисел
+from functools import reduce
+total = reduce(lambda x, y: x + y, numbers)
+print(f"Сумма: {total}")
 ```
 
 ---
 
-### Задание 9: Функция высшего порядка
+### Задание 8: Функции высшего порядка
 
 Создайте функцию высшего порядка, которая принимает другую функцию и список значений, а затем применяет функцию к каждому элементу списка.
 
 **Пример выполнения:**
 ```
-Исходный список: [1, 2, 3, 4, 5]
-Квадраты: [1, 4, 9, 16, 25]
-Кубы: [1, 8, 27, 64, 125]
+Оригинальные числа: [1, 2, 3, 4, 5]
+Удвоенные числа: [2, 4, 6, 8, 10]
+Квадраты чисел: [1, 4, 9, 16, 25]
 ```
 
 **Код для выполнения:**
 ```python
-def apply_function(func, values):
-    """Применяет функцию к каждому элементу списка"""
+def apply_function_to_list(func, values):
+    """
+    Применяет функцию к каждому элементу списка
+    
+    Args:
+        func (function): Функция для применения
+        values (list): Список значений
+    
+    Returns:
+        list: Список результатов применения функции
+    """
     return [func(x) for x in values]
 
+# Определяем несколько функций для применения
+def double(x):
+    return x * 2
+
 def square(x):
-    """Возвращает квадрат числа"""
     return x ** 2
 
-def cube(x):
-    """Возвращает куб числа"""
-    return x ** 3
+def is_positive(x):
+    return x > 0
 
+# Примеры использования
 numbers = [1, 2, 3, 4, 5]
 
-squares = apply_function(square, numbers)
-cubes = apply_function(cube, numbers)
+doubled = apply_function_to_list(double, numbers)
+squared = apply_function_to_list(square, numbers)
 
-print(f"Квадраты: {squares}")
-print(f"Кубы: {cubes}")
+print(f"Оригинальные числа: {numbers}")
+print(f"Удвоенные числа: {doubled}")
+print(f"Квадраты чисел: {squared}")
 ```
 
 ---
 
-### Задание 10: Функция для обработки данных
+### Задание 9: Функция с внутренними функциями
 
-Создайте набор функций для анализа списка оценок студентов:
-- Вычисление среднего балла
-- Поиск минимальной и максимальной оценки
-- Определение количества отличников (оценка 5)
+Создайте функцию, которая содержит внутреннюю функцию для выполнения вспомогательной операции.
 
 **Пример выполнения:**
 ```
-Введите оценки через пробел: 5 4 3 5 5 2 4
-Средний балл: 4.0
-Минимальная оценка: 2
-Максимальная оценка: 5
-Количество отличников: 3
+Результат: 100
 ```
 
 **Код для выполнения:**
 ```python
-def calculate_average(grades):
-    """Вычисляет средний балл"""
-    return sum(grades) / len(grades) if grades else 0
+def calculate_area(shape, *dimensions):
+    """
+    Вычисляет площадь различных фигур
+    
+    Args:
+        shape (str): Тип фигуры ('rectangle', 'circle', 'triangle')
+        *dimensions: Параметры фигуры
+    
+    Returns:
+        float: Площадь фигуры
+    """
+    def rectangle_area(length, width):
+        return length * width
+    
+    def circle_area(radius):
+        return 3.14159 * radius ** 2
+    
+    def triangle_area(base, height):
+        return 0.5 * base * height
+    
+    if shape == "rectangle":
+        return rectangle_area(*dimensions)
+    elif shape == "circle":
+        return circle_area(*dimensions)
+    elif shape == "triangle":
+        return triangle_area(*dimensions)
+    else:
+        raise ValueError(f"Неизвестная фигура: {shape}")
 
-def find_min_grade(grades):
-    """Находит минимальную оценку"""
-    return min(grades) if grades else 0
+# Примеры использования
+area1 = calculate_area("rectangle", 5, 4)  # 20
+area2 = calculate_area("circle", 5)       # 78.53975
+area3 = calculate_area("triangle", 6, 8)  # 24
 
-def find_max_grade(grades):
-    """Находит максимальную оценку"""
-    return max(grades) if grades else 0
-
-def count_excellent_students(grades):
-    """Считает количество отличников (оценка 5)"""
-    return grades.count(5) if grades else 0
-
-grades_str = input("Введите оценки через пробел: ")
-grades = [int(x) for x in grades_str.split()]
-
-print(f"Средний балл: {calculate_average(grades):.1f}")
-print(f"Минимальная оценка: {find_min_grade(grades)}")
-print(f"Максимальная оценка: {find_max_grade(grades)}")
-print(f"Количество отличников: {count_excellent_students(grades)}")
+print(f"Площадь прямоугольника: {area1}")
+print(f"Площадь круга: {area2}")
+print(f"Площадь треугольника: {area3}")
 ```
 
 ---
 
-### Задание 11: Функция с обработкой исключений
+### Задание 10: Декораторы (ознакомительное)
 
-Создайте функцию для безопасного деления двух чисел, которая обрабатывает возможные исключения.
+Создайте простой декоратор, который измеряет время выполнения функции.
 
 **Пример выполнения:**
 ```
-Введите делимое: 10
-Введите делитель: 0
-Ошибка: деление на ноль!
+Функция выполнена за 0.000123 секунд
 ```
 
 **Код для выполнения:**
 ```python
-def safe_divide(a, b):
-    """Безопасное деление двух чисел"""
-    try:
-        result = a / b
+import time
+
+def timer_decorator(func):
+    """
+    Декоратор для измерения времени выполнения функции
+    """
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        end_time = time.time()
+        print(f"Функция {func.__name__} выполнена за {end_time - start_time:.6f} секунд")
         return result
-    except ZeroDivisionError:
-        print("Ошибка: деление на ноль!")
-        return None
-    except TypeError:
-        print("Ошибка: неверный тип данных!")
-        return None
+    return wrapper
 
-dividend = float(input("Введите делимое: "))
-divisor = float(input("Введите делитель: "))
+@timer_decorator
+def slow_function():
+    """Функция, которая имитирует длительное выполнение"""
+    time.sleep(0.1)  # Задержка 0.1 секунды
+    return "Готово!"
 
-result = safe_divide(dividend, divisor)
-if result is not None:
-    print(f"Результат деления: {result}")
+# Пример использования
+result = slow_function()
+print(result)
 ```
 
 ---
 
-### Задание 12: Комплексная задача - калькулятор
+## Дополнительные задания
 
-Создайте программу-калькулятор, которая использует функции для выполнения различных математических операций.
+### Задание 11: Калькулятор с использованием функций
 
-**Пример выполнения:**
-```
-1. Сложение
-2. Вычитание
-3. Умножение
-4. Деление
-Выберите операцию: 1
-Введите первое число: 10
-Введите второе число: 5
-Результат: 15
-```
+Создайте программу калькулятора, которая использует отдельные функции для каждой операции.
 
 **Код для выполнения:**
 ```python
 def add(a, b):
-    """Сложение двух чисел"""
     return a + b
 
 def subtract(a, b):
-    """Вычитание двух чисел"""
     return a - b
 
 def multiply(a, b):
-    """Умножение двух чисел"""
     return a * b
 
 def divide(a, b):
-    """Деление двух чисел"""
     if b == 0:
         raise ZeroDivisionError("Деление на ноль невозможно")
     return a / b
 
 def calculator():
-    """Программа-калькулятор"""
-    operations = {
-        1: ("Сложение", add),
-        2: ("Вычитание", subtract),
-        3: ("Умножение", multiply),
-        4: ("Деление", divide)
-    }
+    """Простой калькулятор с использованием функций"""
+    print("Калькулятор. Поддерживаемые операции: +, -, *, /")
     
-    print("Операции:")
-    for key, (name, _) in operations.items():
-        print(f"{key}. {name}")
-    
-    try:
-        choice = int(input("Выберите операцию: "))
-        if choice not in operations:
-            print("Неверный выбор операции")
-            return
-        
-        num1 = float(input("Введите первое число: "))
-        num2 = float(input("Введите второе число: "))
-        
-        _, operation_func = operations[choice]
-        result = operation_func(num1, num2)
-        
-        print(f"Результат: {result}")
-    except ValueError:
-        print("Ошибка: введите числовое значение")
-    except ZeroDivisionError as e:
-        print(f"Ошибка: {e}")
+    while True:
+        try:
+            num1 = float(input("Введите первое число (или 'q' для выхода): "))
+            operator = input("Введите операцию (+, -, *, /): ")
+            num2 = float(input("Введите второе число: "))
+            
+            if operator == '+':
+                result = add(num1, num2)
+            elif operator == '-':
+                result = subtract(num1, num2)
+            elif operator == '*':
+                result = multiply(num1, num2)
+            elif operator == '/':
+                result = divide(num1, num2)
+            else:
+                print("Неподдерживаемая операция")
+                continue
+            
+            print(f"Результат: {num1} {operator} {num2} = {result}")
+            
+        except ValueError:
+            print("Неверный ввод числа")
+        except ZeroDivisionError as e:
+            print(f"Ошибка: {e}")
+        except KeyboardInterrupt:
+            print("\nПрограмма завершена пользователем")
+            break
 
-calculator()
+# Запуск калькулятора (закомментировано для предотвращения бесконечного цикла при проверке)
+# calculator()
+```
+
+---
+
+### Задание 12: Работа со строками с использованием функций
+
+Создайте набор функций для обработки строк: подсчет слов, подсчет символов, проверка на палиндром.
+
+**Код для выполнения:**
+```python
+def count_words(text):
+    """Подсчитывает количество слов в тексте"""
+    return len(text.split())
+
+def count_characters(text, exclude_spaces=True):
+    """Подсчитывает количество символов в тексте"""
+    if exclude_spaces:
+        text = text.replace(" ", "")
+    return len(text)
+
+def is_palindrome(text):
+    """Проверяет, является ли текст палиндромом"""
+    cleaned = ''.join(char.lower() for char in text if char.isalnum())
+    return cleaned == cleaned[::-1]
+
+def text_statistics(text):
+    """Возвращает статистику по тексту"""
+    return {
+        "words": count_words(text),
+        "characters": count_characters(text),
+        "characters_no_spaces": count_characters(text, exclude_spaces=True),
+        "is_palindrome": is_palindrome(text)
+    }
+
+# Пример использования
+text = "А роза упала на лапу Азора"
+stats = text_statistics(text)
+
+print(f"Текст: '{text}'")
+print(f"Количество слов: {stats['words']}")
+print(f"Количество символов (с пробелами): {stats['characters']}")
+print(f"Количество символов (без пробелов): {stats['characters_no_spaces']}")
+print(f"Является палиндромом: {stats['is_palindrome']}")
 ```
 
 ---
@@ -457,15 +550,23 @@ calculator()
 
 1. Что такое функция в Python?
 2. Как объявить функцию?
-3. Что такое параметры и аргументы функции?
+3. В чем разница между параметрами и аргументами?
 4. Как вернуть значение из функции?
-5. Что такое лямбда-функция?
-6. В чем разница между `map()`, `filter()` и `reduce()`?
-7. Что такое функция высшего порядка?
-8. Как использовать параметры по умолчанию?
-9. Как передать переменное число аргументов в функцию?
-10. Зачем нужна документация функций (docstring)?
+5. Что такое параметры по умолчанию?
+6. Как передать переменное число аргументов в функцию?
+7. Что такое лямбда-функция?
+8. В чем разница между `map()`, `filter()` и `reduce()`?
+9. Что такое функция высшего порядка?
+10. Для чего нужны декораторы?
 
 ## Вывод
 
-В ходе этой практической работы были освоены основы работы с функциями в Python. Были рассмотрены различные типы функций, способы передачи параметров, возвращения значений, а также использование анонимных функций и функций высшего порядка. Функции позволяют структурировать код, повышают его читаемость и переиспользуемость.
+В ходе этой практической работы были освоены основы работы с функциями в Python:
+- Создание и вызов функций
+- Использование различных типов параметров
+- Возврат значений из функций
+- Применение лямбда-функций
+- Использование функций высшего порядка
+- Применение функций для решения задач обработки данных
+
+Функции позволяют структурировать код, делают его более читаемым и переиспользуемым. Понимание работы с функциями является важным шагом на пути к профессиональному программированию.
