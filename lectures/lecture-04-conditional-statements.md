@@ -419,19 +419,19 @@ else:
 
 ```mermaid
 flowchart TD
-    A[Начало] --> B[score = int(input("Введите оценку (0-100):"))]
-    B --> C{score >= 90?}
-    C -->|True| D[grade = "A"]
-    C -->|False| E{score >= 80?}
-    D --> F[print(f"Ваша оценка: {grade}")]
-    E -->|True| G[grade = "B"]
-    E -->|False| H{score >= 70?}
+    A[Начало] --> B["score = input('Введите оценку (0-100):')"]
+    B --> C{"score >= 90?"}
+    C -->|True| D["grade = A"]
+    C -->|False| E{"score >= 80?"}
+    D --> F["print(Ваша оценка: {grade})"]
+    E -->|True| G["grade = B"]
+    E -->|False| H{"score >= 70?"}
     G --> F
-    H -->|True| I[grade = "C"]
-    H -->|False| J{score >= 60?}
+    H -->|True| I["grade = C"]
+    H -->|False| J{"score >= 60?"}
     I --> F
-    J -->|True| K[grade = "D"]
-    J -->|False| L[grade = "F"]
+    J -->|True| K["grade = D"]
+    J -->|False| L["grade = F"]
     K --> F
     L --> F
     F --> M[Конец]
