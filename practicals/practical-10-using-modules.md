@@ -359,7 +359,7 @@ print(f"Разделенные слова: {words}")
 def calculate_distance(point1, point2):
     """Вычисляет евклидово расстояние между двумя точками"""
     import math
-    return math.sqrt((point2[0] - point1[0])**2 + (point2[1] - point1[1])**2)
+    return math.sqrt((point2[0] - point1[0])**2 + (point2[1] - point1[1]))
 
 def is_prime(n):
     """Проверяет, является ли число простым"""
